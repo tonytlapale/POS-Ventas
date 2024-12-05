@@ -1,0 +1,18 @@
+<form class="form">
+  <h2>Detalle Embarques &nbsp;&nbsp;<button mat-button (click)="cancelar()">Cerrar</button></h2>
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Direcciòn</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of data">
+        <td>{{data.dato}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!--  <div mat-dialog-actions>
+        <button mat-button (click)="cancelar()">Cerrar</button>
+      </div> -->
+</form>

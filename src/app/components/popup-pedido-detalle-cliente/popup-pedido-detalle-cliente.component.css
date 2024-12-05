@@ -1,0 +1,61 @@
+.spinner {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%)
+}
+
+.infoFormulario {
+	width: 380px;
+    height: 380px;
+	padding: 16px;
+	border-radius: 10px;
+	margin: auto;
+	background-color: rgb(12, 132, 211);
+	align-items: center;
+}
+
+.infoFormulario label {
+	width: 72px;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.infoFormulario input[type="text"],
+.infoFormulario input[type="email"] {
+	width: 100%;
+	padding: 3px 10px;
+	border: 1px solid #f6f6f6;
+	border-radius: 3px;
+	background-color: #f6f6f6;
+	margin: 8px 0;
+	display: inline-block;
+}
+
+
+.infoFormulario input[type="submit"] {
+	/* width: 100%; */
+	padding: 8px 16px;
+	margin-top: 32px;
+	border: 1px solid #000;
+	border-radius: 5px;
+	display: block;
+	color: #fff;
+	background-color: #000;
+}
+
+.infoFormulario input[type="submit"]:hover {
+	cursor: pointer;
+}
+
+.mat-row:nth-child(1n+1) {
+	background-color: #cbd7eb;
+}
+
+.mat-row:not(:nth-child(2n+1)) {
+	background-color: #ffffff;
+}
+
+.mat-button {
+	background-color: #8cb1ec;
+}

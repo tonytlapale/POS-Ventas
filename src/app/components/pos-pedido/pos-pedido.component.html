@@ -1,0 +1,411 @@
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<header class="contenedor">
+    <div class="logo">
+        <a href="https://www.llanodelatorre.com.mx/" target="_blank" rel="noopener noreferrer">
+            <img width="110" alt="Angular Logo"
+                src="https://llanodelatorremx.vtexassets.com/assets/vtex/assets-builder/llanodelatorremx.store-theme/1.98.4/images/logo.9f6c409e___769d454cc976011fb613e81afafcdb28.svg" /></a>
+        <p></p>
+        <h2 style="color:rgb(177, 5, 5)">&nbsp;<span>{{ empleadoDetalle.name }}</span></h2>
+        <h3 style="color:rgb(177, 5, 5)">&nbsp;<span>{{ empleadoDetalle.first_NAME }}</span></h3>
+    </div>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;
+
+    <ul class="menu-bar">
+        <li><a (click)="regresarHome(empleadoDetalle.user_ID)">Regresar Home</a>
+        </li>
+    </ul>
+</header>
+
+
+<header class="contenedor-mob">
+
+    <div class="logo">
+        <a href="https://www.llanodelatorre.com.mx/" target="_blank" rel="noopener noreferrer">
+            <img width="110" alt="Angular Logo"
+                src="https://llanodelatorremx.vtexassets.com/assets/vtex/assets-builder/llanodelatorremx.store-theme/1.98.4/images/logo.9f6c409e___769d454cc976011fb613e81afafcdb28.svg" /></a>
+        <p></p>
+        <h2 style="color:rgb(177, 5, 5)">&nbsp;<span>{{ empleadoDetalle.name }}</span></h2>
+    </div>
+
+
+    <nav class="nav-mob">
+        <ul class="nav-mob-sub">
+            <li><a (click)="regresarHome(empleadoDetalle.user_ID)">Regresar Home</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+
+
+
+<form class="pedido-form">
+    <div class="form-row align-items-center">
+
+        <label>&nbsp;Cliente</label> <br>
+        <div class="input-group mb-1">
+            <input type="text" class="form-control " placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" value="900-MOSTRADOR" readonly required>
+            <button class="btn btn-secondary" type="button" id="button-addon2" (click)="openDialog(empleadoDetalle.name, empleadoDetalle.user_ID)" >Cliente</button>
+        </div>
+        <div class="col-auto my-2">
+            <label>L.P:</label> <br>
+            <select name="pricelist" id="pricelist" style="height:38px;width:70px" required>
+                <option *ngFor="let p of userList | unique | orderBy" [value]="p">{{p}}</option>
+            </select>
+        </div>
+
+        <div class="col-sm-2 my-2">
+            <label>Clave:</label> <br>
+            <input id="Clave" class="form-control" type="text" placeholder="Clave..." required>
+        </div>
+        <div class="col-sm-7 my-2">
+            <label>Descripcion:</label> <br>
+            <input id="Descripcion" class="form-control" type="text" placeholder="Descripcion..." required>
+        </div>
+        <div class="col-auto my-2">
+            <label>.</label> <br>
+            <button id="buscaCliente" class="btn btn-secondary" onclick="openDialog()" type="button">Busca
+                Articulo</button>
+        </div>
+        <div class="col-sm-2 my-2">
+            <label>Cantidad:</label> <br>
+            <input id="Cantidad" class="form-control" type="text" placeholder="Cantidad..." required>
+        </div>
+        <div class="col-sm-2 my-2">
+            <label>Precio:</label> <br>
+            <input id="Precio" class="form-control" type="text" placeholder="Precio.." value="$0.00" readonly required>
+        </div>
+        <div class="col-sm-1 my-2">
+            <label>Origen</label> <br>
+            <input id="BodegaOrigen" class="form-control" type="text" value="00" readonly  required>
+        </div>
+        <div class="col-auto my-2">
+            <label>.</label> <br>
+            <button id="buscaBodOri" class="btn btn-secondary" onclick="togglePopup3()" type="button">Origen</button>
+        </div>
+        <div class="col-sm-1 my-2">
+            <label>Destino</label> <br>
+            <input id="BodegaDestino" class="form-control" type="text" value="00"  readonly required>
+        </div>
+        <div class="col-auto my-2">
+            <label>.</label> <br>
+            <button id="buscaBodDest" class="btn btn-secondary" onclick="togglePopup4()" type="button">Destino</button>
+        </div>
+    </div>
+
+    <div class="col-sm-0 my-4">
+        <button id="adicionar" class="btn btn-success" type="button">Agregar a Pedido</button>
+    </div>
+</form>
+<b></b>
+
+
+
+<table id="mytable" class="table table-bordered table-hover ">
+    <tr>
+        <th>Clave</th>
+        <th>Descripcion</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Eliminar</th>
+    </tr>
+</table>
+<b></b>
+<p>&nbsp;Lineas Agregadas:&nbsp;&nbsp;<a id="adicionados"></a></p>
+<b></b>
+
+
+
+<div class="popup" id="popup-1">
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="close-btn" onclick="togglePopup()">&times;</div>
+        <h1>Clientes</h1>
+        <form name="FormularioClientes" action="#" >
+            <div class="form-row align-items-center">
+                <div class="col-sm-2 my-2">
+                    <label>&nbsp;Numero Cliente:</label> <br>
+                    <input type="text" class="form-control" id="NumeroCliente" name="NumeroCliente">
+                </div>
+                <div class="col-sm-5 my-2">
+                    <label>Nombre Cliente:</label> <br>
+                    <input type="text" class="form-control" id="NombreCliente" name="NombreCliente">
+                </div>
+                <div class="col-sm-2 my-2">
+                    <label>RFC:</label> <br>
+                    <input type="text" class="form-control" id="RFC" name="RFC">
+                </div>
+                <div class="col-auto my-2">
+                    <label>.</label> <br>
+                    <input type="submit" id="buscaCliente" class="btn btn-primary" value="Buscar Cliente">
+                </div>
+            </div>
+        </form>
+        <div>
+            <table id="TablaCliente" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>ID Cliente</td>
+                        <td>Nombre Comercial</td>
+                        <td>Lista Precio</td>
+                        <td>RFC</td>
+                        <td>Correos</td>
+                        <td>Telefono</td>
+                        <td>Tipo Venta</td>
+                        <td>Direccion</td>
+                    </tr>
+                  <!--   <tr>
+                        <td colspan="8">
+                            <input id="buscarCliente" type="text" class="form-control"
+                                placeholder="Escriba algo para filtrar" />
+                        </td>
+                    </tr> -->
+                </thead>
+               <!--  <tbody>
+                    <tr class="encabezado" th:each="Total : ${BuscaClientes}">
+                        <td th:utext=${Total.LOCAL_CUSTOMER_ID}>ID Cliente</td>
+                        <td th:utext=${Total.CUSTOMER_NAME}>Nombre Comercial</td>
+                        <td th:utext=${Total.PRICE_LIST_H_ID}>Lista Precio</td>
+                        <td th:utext=${Total.RFC}>RFC</td>
+                        <td th:utext=${Total.VENTA}>Tipo Venta</td>
+                    </tr>
+                </tbody> -->
+            </table>
+        </div>
+        <div align="center">
+            <button id="AceptarCliente" class="btn btn-success" type="button"
+                style="height:40px;width:150px">Aceptar</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="popup2" id="popup-2">
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="close-btn" onclick="togglePopup2()">&times;</div>
+        <h1>Articulos</h1>
+        <p>Buscar articulos.</p>
+        <button id="AceptarArticulo" class="btn btn-success" type="button">Aceptar</button>
+    </div>
+</div>
+
+
+<div class="popup3" id="popup-3">
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="close-btn" onclick="togglePopup3()">&times;</div>
+        <h1>Bodega Origen</h1>
+        <p>Buscar existencia de articulos.</p>
+        <button id="AceptarArticulo" class="btn btn-success" type="button">Aceptar</button>
+    </div>
+</div>
+
+
+<div class="popup4" id="popup-4">
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="close-btn" onclick="togglePopup4()">&times;</div>
+        <h1>Bodega Destino</h1>
+        <p>Buscar existencia de articulos.</p>
+        <button id="AceptarArticulo" class="btn btn-success" type="button">Aceptar</button>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //obtenemos el valor de los input
+
+        $('#adicionar').click(function () {
+            var Clave = document.getElementById("Clave").value;
+            var Cantidad = document.getElementById("Cantidad").value;
+            var Descripcion = document.getElementById("Descripcion").value;
+            var Cantidad = document.getElementById("Cantidad").value;
+            var Precio = document.getElementById("Precio").value;
+            var i = 1; //contador para asignar id al boton que borrara la fila
+            var fila = '<tr id="row' + i + '"><td>' + Clave + '</td><td>' + Descripcion + '</td><td>' + Cantidad + '</td><td>' + Precio + '</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td></tr>'; //esto seria lo que contendria la fila
+
+            if ("" == Descripcion || Descripcion == null || "" == Cantidad || Cantidad == null || "" == Precio || Precio == null) {
+
+            } else {
+                i++;
+
+
+                $('#mytable tr:first').after(fila);
+                $("#adicionados").text(""); //esta instruccion limpia el div adicioandos para que no se vayan acumulando
+                var nFilas = $("#mytable tr").length;
+                $("#adicionados").append(nFilas - 1);
+                //le resto 1 para no contar la fila del header
+                document.getElementById("Clave").value = "";
+                document.getElementById("Descripcion").value = "";
+                document.getElementById("Cantidad").value = "";
+                document.getElementById("Precio").value = "";
+                document.getElementById("Descripcion").focus();
+
+            }
+
+
+        });
+
+
+
+
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            //cuando da click obtenemos el id del boton
+            $('#row' + button_id + '').remove(); //borra la fila
+            //limpia el para que vuelva a contar las filas de la tabla
+            $("#adicionados").text("");
+            var nFilas = $("#mytable tr").length;
+            $("#adicionados").append(nFilas - 1);
+        });
+    });
+
+
+
+
+    function togglePopup() {
+        document.getElementById("popup-1").style.display === 'block';
+        
+    }
+
+    function togglePopup2() {
+        document.getElementById("popup-2").classList.toggle("active");
+    }
+
+
+    function togglePopup3() {
+        document.getElementById("popup-3").classList.toggle("active");
+    }
+
+    function togglePopup4() {
+        document.getElementById("popup-4").classList.toggle("active");
+    }
+
+
+    document.querySelector("#buscarCliente").onkeyup = function () {
+        $TableFilter("#TablaCliente", this.value);
+    }
+
+    $TableFilter = function (id, value) {
+        var rows = document.querySelectorAll(id + ' tbody tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var showRow = false;
+
+            var row = rows[i];
+            row.style.display = 'none';
+
+            for (var x = 0; x < row.childElementCount; x++) {
+                if (row.children[x].textContent.toLowerCase().indexOf(value.toLowerCase().trim()) > -1) {
+                    showRow = true;
+                    break;
+                }
+            }
+
+            if (showRow) {
+                row.style.display = null;
+            }
+        }
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+<footer id="pie">
+    <section class="links">
+        <a href="https://www.llanodelatorre.com.mx/" target="_blank" rel="noopener noreferrer">llanodelatorre.com.mx
+        </a>
+    </section>
+
+    <div class="social">
+        <a aria-label="llanodelatorre on twitter" target="_blank" rel="noopener"
+            href="https://twitter.com/llanodelatorre" title="Twitter">
+            <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 400 400">
+                <rect width="400" height="400" fill="none" />
+                <path
+                    d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23"
+                    fill="#fff" />
+            </svg>
+        </a>
+        <a aria-label="llanodelatorre on YouTube" target="_blank" rel="noopener"
+            href="https://www.youtube.com/channel/UCP8xIl7aKKf9w8nAqi9__fA" title="YouTube">
+            <svg id="youtube-logo" height="24" width="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24" fill="#fff">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                    d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z" />
+            </svg>
+        </a>
+    </div>
+</footer>
+
+<script>
+    const toggle = document.querySelector(".toggle");
+    const menu = document.querySelector(".menu-mob");
+    const items = document.querySelectorAll(".item");
+
+    /* Toggle mobile menu */
+    function toggleMenu() {
+        if (menu.classList.contains("active")) {
+            menu.classList.remove("active");
+            toggle.querySelector("a").innerHTML = "<i class='fas fa-bars'></i>";
+        } else {
+            menu.classList.add("active");
+            toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
+        }
+    }
+
+    /* Activate Submenu */
+    function toggleItem() {
+        if (this.classList.contains("submenu-active")) {
+            this.classList.remove("submenu-active");
+        } else if (menu.querySelector(".submenu-active")) {
+            menu.querySelector(".submenu-active").classList.remove("submenu-active");
+            this.classList.add("submenu-active");
+        } else {
+            this.classList.add("submenu-active");
+        }
+    }
+
+    /* Close Submenu From Anywhere */
+    function closeSubmenu(e) {
+        if (menu.querySelector(".submenu-active")) {
+            let isClickInside = menu
+                .querySelector(".submenu-active")
+                .contains(e.target);
+
+            if (!isClickInside && menu.querySelector(".submenu-active")) {
+                menu.querySelector(".submenu-active").classList.remove("submenu-active");
+            }
+        }
+    }
+    /* Event Listeners */
+    toggle.addEventListener("click", toggleMenu, false);
+    for (let item of items) {
+        if (item.querySelector(".submenu")) {
+            item.addEventListener("click", toggleItem, false);
+        }
+        item.addEventListener("keypress", toggleItem, false);
+    }
+    document.addEventListener("click", closeSubmenu, false);
+</script>

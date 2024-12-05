@@ -1,0 +1,41 @@
+<!-- <h2>Detalle cliente</h2>
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Bodega</th>
+      <th>Descripción</th>
+      <th>Existencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor= "let data of data" >
+      <td>{{data.rfc}}</td>
+      <td>{{data.no_INT}}</td>
+      <td>{{data.state_NAME}}</td>
+    </tr>
+  </tbody>
+</table>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancelar()">Cerrar</button>
+  </div> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<form class="form">
+  <h2>Detalle Cliente &nbsp;&nbsp;<button mat-button (click)="cancelar()">Cerrar</button></h2>
+  <p type="Nombre:" *ngFor="let data of data">Nombre: {{data.customer_NAME}}</p>
+  <p type="RFC:" *ngFor="let data of data">RFC: {{data.rfc}}</p>
+  <p type="Dirección:" *ngFor="let data of data">Dirección: {{data.street}} {{data.no_EXT}} {{data.no_INT}}</p>
+  <p type="Venta:" *ngFor="let data of data">Venta: {{data.venta}}</p>
+  <p type="Estado:" *ngFor="let data of data">Estado: {{data.state_NAME}}</p>
+  <p type="Delegación:" *ngFor="let data of data">Delegación: {{data.county}} Municipio: {{data.county}}</p>
+  <p type="Email 2:" *ngFor="let data of data">Email 2: {{data.email1}} Email 3: {{data.email2}}</p>
+  <p type="Tipo Venta:" *ngFor="let data of data">Tipo Venta: {{data.venta}}</p>
+  <!-- <button mat-button (click)="cancelar()">Cerrar</button> -->
+  <div>
+    <span class="fa fa-phone" *ngFor="let data of data"> {{data.phone}}</span>
+    <span class="fa fa-envelope" *ngFor="let data of data"> {{data.email}}</span>
+  </div>
+</form>

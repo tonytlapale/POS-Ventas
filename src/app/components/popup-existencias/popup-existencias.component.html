@@ -1,0 +1,22 @@
+<form class="form">
+  <h2>Detalle de Existencias &nbsp;&nbsp;<button mat-button (click)="cancelar()">Cerrar</button></h2>
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Bodega</th>
+        <th>Descripción</th>
+        <th>Existencia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of data">
+        <td>{{data.warehouse_ID}}</td>
+        <td>{{data.description}}</td>
+        <td>{{data.existencia}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!--  <div mat-dialog-actions>
+    <button mat-button (click)="cancelar()">Cerrar</button>
+  </div> -->
+</form>

@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+/* --- GLOBALES --- */
+/* * {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	box-sizing: border-box;
+  } */
+
+body {
+  /*	background-image: url("https://fondosmil.com/fondo/17567.jpg") !important;  */
+    background-image: url("https://st2.depositphotos.com/1888461/9297/i/950/depositphotos_92979278-stock-illustration-light-grey-background-with-soft.jpg") !important;
+	background-position: center center !important;
+	background-attachment: fixed !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+  }
